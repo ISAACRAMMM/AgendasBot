@@ -17,7 +17,7 @@ const filePath = path.join(__dirname, './data/pedidos.json');
 
 
 
-export async function guardarPedido(pedido) {
+async function guardarPedido(pedido) {
     try {
         let data = [];
         try {
@@ -38,11 +38,19 @@ export async function guardarPedido(pedido) {
 }
 
 
+async function readPedidos(ruta){
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+router.get('/pedidos/:ruta', async (req, res) => {
 
 
-
-router.get('/pedidos', async (req, res) => {
-
+    const data = readPedidos(req.ruta)
+    res.json(data);
     
 
 })
