@@ -1,9 +1,16 @@
 import express from 'express';
 const router = express.Router();
-import fs from "fs";
 
 
-app.use(express.json());
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+router.use(express.json());
 
 // Ruta al archivo JSON donde se almacenarán los pedidos
 const filePath = path.join(__dirname, './data/pedidos.json');
@@ -30,7 +37,18 @@ export async function guardarPedido(pedido) {
     }
 }
 
-app.post('/pedidos', async (req, res) => {
+
+
+
+
+router.get('/pedidos', async (req, res) => {
+
+    
+
+})
+
+
+router.post('/nuevoPedido', async (req, res) => {
     const { fecha, nombreCliente, productos } = req.body;
 
     // Validación simple de los datos
@@ -49,3 +67,7 @@ app.post('/pedidos', async (req, res) => {
 
     res.status(201).json({ message: 'Pedido recibido y guardado', pedido: newPedido });
 });
+
+
+
+export default router;
