@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 router.use(express.json());
 
 // Ruta al archivo JSON donde se almacenarán los pedidos
-const filePath = path.join(__dirname, './data/pedidos.json');
+const filePath = path.join(__dirname, '../data/pedidos.json');
 
 
 
@@ -38,23 +38,42 @@ async function guardarPedido(pedido) {
 }
 
 
-async function readPedidos(ruta){
+async function readPedidos(rutas) {
     try {
-        
+        const fileData = await fs.readFile(filePath, 'utf-8');
+        console.log(fileData)
+        const pedidos = JSON.parse(fileData);
+        console.log(pedidos)
+        // Filtrar los pedidos que coincidan con las rutas proporcionadas
+        const pedidosEncontrados = pedidos.filter(p => rutas.includes(p.ruta));
+
+        // Si se encontraron pedidos, devolverlos
+        if (pedidosEncontrados.length > 0) {
+            return pedidosEncontrados;
+        } else {
+            throw new Error('No se encontraron pedidos con las rutas proporcionadas.');
+        }
     } catch (error) {
-        
+        throw new Error('Error al leer los pedidos: ' + error.message);
     }
 }
 
-router.get('/pedidos/:ruta', async (req, res) => {
+router.get('/get', async (req, res) => {
+    try {
+        // Validar que haya rutas en la consulta
+        if (!req.query.rutas) {
+            return res.status(400).json({ error: 'No se proporcionaron rutas para la búsqueda.' });
+        }
 
+        const rutas = req.query.rutas.split(',');
+        console.log(rutas)
+        const data = await readPedidos(rutas);
 
-    const data = readPedidos(req.ruta)
-    res.json(data);
-    
-
-})
-
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 router.post('/nuevoPedido', async (req, res) => {
     const { fecha, nombreCliente, productos } = req.body;

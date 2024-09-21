@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send("hi")
     });
     
-app.use('/pedido',routePedido)
+app.use('/pedidos',routePedido)
 
 app.listen(PORT, () => {
     try {

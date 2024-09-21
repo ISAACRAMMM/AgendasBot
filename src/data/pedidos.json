@@ -1,0 +1,32 @@
+[
+  {
+    "fecha": "2024-09-15T22:52:11.800Z",
+    "NombreCliente": "iasasd",
+    "ruta": "Ocotlan",
+    "pedido": [
+      "asdfafsd",
+      "askdjasd",
+      "asdasd"
+    ]
+  },
+  {
+    "fecha": "2024-09-15T22:53:51.590Z",
+    "NombreCliente": "isaac",
+    "ruta": "Ameca",
+    "pedido": [
+      "paracetamol",
+      "refresco"
+    ]
+  },
+  {
+    "fecha": "2024-09-18T01:32:23.438Z",
+    "NombreCliente": "Isaac",
+    "ruta": "Autlan",
+    "pedido": [
+      "Paracetamol",
+      "Loratadina",
+      "Pepsi",
+      "Listo"
+    ]
+  }
+]
